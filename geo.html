@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Geo api</title>
+
+</head>
+<body>
+
+	<h1></h1>
+
+
+
+	<script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+	<script type="text/javascript">
+
+		var coords, apiUrl = "curl.php";
+
+		function processCoordinates(pos){
+			coords = {lat:pos.coords.latitude, lon:pos.coords.longitude};
+		}
+
+		function retrieveLocation() {
+			window.navigator.geolocation.getCurrentPosition(processCoordinates);
+		}
+
+		function callWeatherService(apiUrl, coords) {
+			$.getJSON(apiUrl, coords, function(data){
+				console.log(data);
+			});
+		}
+
+		function getWeatherForecast() {
+			retrieveLocation();
+			callWeatherService(apiUrl, coords);
+		}	
+	</script>
+</body>
+</html>
